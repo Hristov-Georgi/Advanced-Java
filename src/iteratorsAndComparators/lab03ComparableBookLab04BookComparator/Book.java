@@ -1,0 +1,56 @@
+package iteratorsAndComparators.lab03ComparableBookLab04BookComparator;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Book implements Comparable<Book>{
+
+    private String title;
+    private int year;
+    private List<String> authors;
+
+    public Book(String title, int year, String... authors) {
+        this.title = title;
+        this.year = year;
+        this.setAuthors(authors);
+
+    }
+
+    private void setAuthors(String... authors) {
+        this.authors = Arrays.stream(authors).collect(Collectors.toList());
+    }
+
+    private void setTitle(String title) {
+        this.title = title;
+    }
+
+    private void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public int getYear() {
+        return this.year;
+    }
+
+    public List<String> getAuthors() {
+        return this.authors;
+    }
+
+    @Override
+    public int compareTo(Book other) {
+
+      int compared = this.title.compareTo(other.title);
+
+      if(compared == 0) {
+          compared = Integer.compare(this.year, other.year);
+      }
+
+      return compared;
+    }
+
+}
